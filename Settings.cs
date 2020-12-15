@@ -27,7 +27,10 @@ namespace MineDetonator
 	    [Menu("Current area %")]
 	    public RangeNode<float> CurrentAreaPct { get; set; } = new RangeNode<float>(0, 0, 500);
 
-	    [Menu("Debug: Last trigger reason")]
+		[Menu("Check for MouseKeyDown (only detonate if its not pressed)")]
+		public ToggleNode CheckMouseKey { get; set; } = new ToggleNode(true);
+
+		[Menu("Debug: Last trigger reason")]
 	    public TextNode TriggerReason { get; set; } = new TextNode("a2");
 
 	    [Menu("Filter empty action (Shaper only!)")]
