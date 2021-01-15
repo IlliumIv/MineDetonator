@@ -55,9 +55,11 @@ namespace MineDetonator
                 && !x.Path.StartsWith("Metadata/Monsters/LeagueBetrayal/BetrayalTaserNet")
                 && !x.Path.StartsWith("Metadata/Monsters/LeagueBetrayal/BetrayalUpgrades/UnholyRelic")
                 && !x.Path.StartsWith("Metadata/Monsters/LeagueBetrayal/BetrayalUpgrades/BetrayalDaemonSummonUnholyRelic")
+                && x.GetComponent<Life>() != null 
                 && !x.GetComponent<Life>().HasBuff("hidden_monster")
                 && !x.GetComponent<Life>().HasBuff("avarius_statue_buff")
                 && !x.GetComponent<Life>().HasBuff("hidden_monster_disable_minions")
+                && x.GetComponent<Actor>() != null
                 && FilterNullAction(x.GetComponent<Actor>())
                 && x.GetComponent<Actor>().CurrentAction?.Skill?.Name != "AtziriSummonDemons"
                 && x.GetComponent<Actor>().CurrentAction?.Skill?.Id != 728
@@ -75,8 +77,11 @@ namespace MineDetonator
             {
                 if (deployedObjects.Any(x => x.Entity != null && x.Entity.IsValid && x.Entity.GetComponent<Stats>().StatDictionary[GameStat.CannotDie] == 0))
                 {
-                    LastDetonTime = DateTime.Now;
-                    Keyboard.KeyPress(Settings.DetonateKey.Value);
+                    if (!(Keyboard.IsKeyDown(Keyboard.VK_RBUTTON) && Settings.CheckMouseKey.Value))
+                    {
+                        LastDetonTime = DateTime.Now;
+                        Keyboard.KeyPress(Settings.DetonateKey.Value);
+                    }
                 }
             }
         }
