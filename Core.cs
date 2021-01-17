@@ -75,7 +75,7 @@ namespace MineDetonator
 
             if ((DateTime.Now - LastDetonTime).TotalMilliseconds > Settings.DetonateDelay.Value)
             {
-                if (deployedObjects.Any(x => x.Entity != null && x.Entity.IsValid && x.Entity.GetComponent<Stats>().StatDictionary[GameStat.CannotDie] == 0))
+                if (deployedObjects.Any(x => x.Entity != null && x.Entity.IsValid /*&& x.Entity.GetComponent<Stats>().StatDictionary[GameStat.CannotDie] == 0*/))
                 {
                     if (!(Keyboard.IsKeyDown(Keyboard.VK_RBUTTON) && Settings.CheckMouseKey.Value))
                     {
